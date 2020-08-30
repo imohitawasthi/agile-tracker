@@ -1,0 +1,69 @@
+.padding-0 {
+    padding: 0px !important;
+}
+
+.right {
+    text-align: right;
+}
+
+.center {
+    text-align: center;
+}
+
+.middle {
+    vertical-align: middle;
+    margin: auto;
+}
+
+/* BUTTONS */
+
+.agile-tracker-button {
+    position: relative;
+    cursor: pointer;
+    border-radius: 2px;
+    border: none;
+    outline: none !important;
+
+    padding: 8px 14px;
+    font-size: 16px;
+    line-height: 19px;
+
+    margin: 0px 8px;
+
+    -webkit-transition: all 0.25s;
+    -moz-transition: all 0.25s;
+    transition: all 0.25s;
+}
+
+.agile-tracker-button:active {
+    opacity: 0.85;
+}
+.agile-tracker-button:hover {
+    filter: brightness(95%);
+}
+.agile-tracker-button:focus {
+}
+
+.agile-tracker-button:disabled {
+    cursor: default;
+    filter: brightness(90%) !important;
+}
+
+.agile-tracker-button-type-success {
+    background: #27ae60;
+    color: #ffffff;
+}
+
+.agile-tracker-button-type-basic {
+    background: #f2f2f2;
+    color: #333333;
+}
+
+.agile-tracker-button-type-transparent {
+    background: transparent;
+    color: #333333;
+}
+.agile-tracker-button-type-transparent:active {
+    opacity: 0.85;
+    background: #f2f2f2;
+}
