@@ -2,6 +2,10 @@
     padding: 0px !important;
 }
 
+.left {
+    text-align: left;
+}
+
 .right {
     text-align: right;
 }
@@ -13,6 +17,10 @@
 .middle {
     vertical-align: middle;
     margin: auto;
+}
+
+.flex {
+    display: flex;
 }
 
 /* BUTTONS */

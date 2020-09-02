@@ -1,20 +1,22 @@
 import Constants from './Constants'
 import Api from './AssayApi'
 import Master from './AssayMaster'
+import Task from './AssayTask'
 
 class Assay {
 
     constructor() {
 
         this.initialize = (options) => {
-            this.apiUrl = (options && options.apiUrl) ? options.apiUrl : Constants.apiHost
-            this.apiPort = (options && options.apiPort) ? options.apiPort : Constants.apiPort
+            this.apiUrl = (options && options.apiUrl) ? options.apiUrl : Constants.API_HOST
+            this.API_PORT = (options && options.API_PORT) ? options.API_PORT : Constants.API_PORT
             this.Storage = (options && options.storage) ? options.storage : window.sessionStorage
 
             this.Master = new Master(this)
+            this.Task = new Task(this)
 
-            this.apiProtocol = (options && options.apiProtocol) ? options.apiProtocol : 'http://'
-            Api.initialize(this.apiProtocol + this.apiUrl + this.apiPort)
+            this.API_PROTOCOL = (options && options.API_PROTOCOL) ? options.API_PROTOCOL : 'http://'
+            Api.initialize(this.API_PROTOCOL + this.apiUrl + (this.API_PORT ? `:${this.API_PORT}` : ''))
         }
 
         this.getSession = () => {

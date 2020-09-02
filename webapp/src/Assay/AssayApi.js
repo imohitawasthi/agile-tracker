@@ -20,9 +20,14 @@ class Api {
             this.apiClient = this.createEndpoint(baseURL)
         }
 
-        this.fetchUser = () => this.apiClient.get('users', null, { headers: { 'X-SELECT': JSON.stringify({}) } })
-        // this.editUser=  param => this.apiClient.put('v2/user', param)
-        // this.postUser = param => this.apiClient.post('v2/user', param)
+        // this.getTask = () => this.apiClient.get('api/v1/task/', null, { headers: { 'X-SELECT': JSON.stringify({}) } })
+        this.getTask = () => this.apiClient.get('api/v1/task/')
+
+        this.postTask = (payload) => this.apiClient.post('api/v1/task/', payload)
+        this.postTaskDetails = (payload) => this.apiClient.post('api/v1/task/Details/', payload)
+        
+        this.getBucket = () => this.apiClient.get('api/v1/bucket/')
+        this.postBucket = (payload) => this.apiClient.post('api/v1/bucket/', payload)
 
         this.setToken = (token) => {
             this.apiClient.setHeader('Authorization', 'Bearer ' + token)

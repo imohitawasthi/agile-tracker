@@ -21,7 +21,9 @@ from services.apis import views
 
 router = routers.DefaultRouter()
 
-router.register(r'v1/bucket', views.AtBucketAPIV1)
+router.register('v1/bucket', views.AtBucketAPIV1)
+router.register('v1/task', views.AtTaskAPIV1)
+router.register(r'^v1/task/<pk>\d+', views.AtTaskSingleAPIV1, basename="v1/task/")
 
 urlpatterns = [
     path('admin/', admin.site.urls),

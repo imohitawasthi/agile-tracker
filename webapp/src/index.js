@@ -18,7 +18,7 @@ import './Theme/Styles/Styles.css'
 
 const store = configureStore()
 
-Assay.initialize({ apiPort: Constants.apiPort, apiUrl: Constants.apiHost, apiProtocol: Constants.apiProtocol})
+Assay.initialize({ API_PORT: Constants.API_PORT, apiUrl: Constants.API_HOST, API_PROTOCOL: Constants.API_PROTOCOL})
 Assay.setSession('')
 ReactDOM.render(
   <Provider store={store}>
