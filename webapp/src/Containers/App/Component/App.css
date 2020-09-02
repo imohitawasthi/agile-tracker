@@ -1,0 +1,47 @@
+@font-face {
+  font-family: Montserrat;
+  src: url('./../../../Theme/Font/Montserrat/Montserrat-Regular.otf');
+}
+
+.agile-tracker-app-root {
+  background: #ffffff;
+  font-family: Montserrat;
+  font-weight: normal;
+  font-style: normal;
+
+  color: #333333;
+}
+
+.agile-tracker-app-container {
+  display: flex;
+  flex-wrap: wrap;
+  /* padding-top: 72px; */
+}
+
+.agile-tracker-app-container-navigation {
+  /* flex: 3; */
+
+  padding: 72px 0px 0px 0px !important;
+}
+
+.agile-tracker-app-container-children {
+  /* flex: 7; */
+
+  padding: 72px 0px 0px 0px !important;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c2c2c2;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c2c0c0;
+}

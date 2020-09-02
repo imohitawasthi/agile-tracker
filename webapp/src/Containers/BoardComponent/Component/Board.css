@@ -1,0 +1,287 @@
+.agile-tracker-board-component-root {
+    padding: 8px 0px;
+}
+
+/* DATE SELECTION */
+
+.agile-tracker-board-date-selection {
+    padding: 12px;
+}
+
+.agile-tracker-board-date-selection-content {
+    display: flex;
+
+    justify-content: center;
+
+    width: 40%;
+    margin: auto auto;
+
+    padding: 24px;
+
+    border: 1px solid #e0e0e0;
+    border-radius: 50px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+}
+
+.agile-tracker-board-date-selection-date {
+    margin: auto 0px;
+    padding: 0px 8px;
+
+    cursor: pointer;
+
+    -webkit-transition: all 0.25s;
+    -moz-transition: all 0.25s;
+    transition: all 0.25s;
+}
+
+.agile-tracker-board-date-selection-date:hover {
+    text-shadow: 2px 2px 8px rgba(51, 51, 51, 0.25);
+}
+
+.agile-tracker-board-date-selection-new-task {
+    font-size: 36px;
+
+    margin: auto 0px;
+    padding: 0px 8px;
+
+    cursor: pointer;
+
+    -webkit-transition: all 0.25s;
+    -moz-transition: all 0.25s;
+    transition: all 0.25s;
+}
+
+.agile-tracker-board-date-selection-new-task:hover {
+    text-shadow: 2px 2px 8px rgba(51, 51, 51, 0.25);
+}
+
+/* OPTIONS */
+
+.agile-tracker-board-date-option {
+    display: flex;
+
+    padding: 12px;
+}
+
+.agile-tracker-board-date-option-content {
+    display: flex;
+
+    justify-content: center;
+
+    margin: auto auto;
+
+    padding: 8px 12px;
+
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.agile-tracker-board-date-option-date {
+    margin: auto 0px;
+    padding: 0px 8px;
+
+    cursor: pointer;
+
+    -webkit-transition: all 0.25s;
+    -moz-transition: all 0.25s;
+    transition: all 0.25s;
+}
+
+.agile-tracker-board-date-option-date:hover {
+    text-shadow: 2px 2px 8px rgba(51, 51, 51, 0.25);
+}
+
+.agile-tracker-board-date-option-new-task {
+    font-size: 36px;
+
+    margin: auto 0px;
+    padding: 0px 8px;
+
+    cursor: pointer;
+
+    -webkit-transition: all 0.25s;
+    -moz-transition: all 0.25s;
+    transition: all 0.25s;
+}
+
+.agile-tracker-board-date-option-new-task:hover {
+    text-shadow: 2px 2px 8px rgba(51, 51, 51, 0.25);
+}
+
+/* BUCKET LIST */
+
+.agile-tracker-bucket-body {
+}
+
+.agile-tracker-bucket-body-add-new {
+}
+
+.agile-tracker-bucket-list {
+    margin: 24px 0px;
+}
+
+.agile-tracker-bucket-element {
+    /* margin: auto auto; */
+    /* border-bottom: 2px solid #E0E0E0;  */
+    border-radius: 2px;
+    margin: 0px 8px;
+}
+
+.agile-tracker-bucket-card {
+    /* border-radius: 2px; */
+    padding: 12px 12px 12px 12px;
+
+    margin: 0px 24px;
+}
+
+.agile-tracker-bucket-name {
+    font-size: 24px;
+    line-height: 28px;
+}
+
+.agile-tracker-bucket-description {
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.agile-tracker-bucket-foot {
+    font-size: 10px;
+    line-height: 12px;
+}
+
+.agile-tracker-bucket-created {
+}
+
+.agile-tracker-task-buttons {
+    margin: 12px 0px;
+}
+
+/* TASKS */
+
+.agile-tracker-task-list {
+    margin: 24px 12px;
+}
+
+.agile-tracker-task-list-element-head {
+    font-size: 24px;
+    line-height: 28px;
+
+    text-transform: capitalize;
+}
+
+.agile-tracker-task-list-element-head-options {
+    font-size: 16px;
+
+    padding: 4px 8px 0px 8px;
+    color: #333333;
+}
+
+.agile-tracker-task-list-element-head-options .fa {
+    padding: 0px 4px;
+
+    cursor: pointer;
+}
+
+.agile-tracker-task-list-element {
+    margin: auto auto;
+    width: 80%;
+
+    padding: 12px 8px;
+
+    border-bottom: 2px solid #f2f2f2;
+}
+
+.agile-tracker-task-list-element-foot {
+    display: flex;
+    flex-direction: row-reverse;
+
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.agile-tracker-task-list-element-foot-content {
+    padding: 0px 24px;
+}
+
+.agile-tracker-task-list-element-foot-content label {
+    text-transform: capitalize;
+    padding: 0px 8px;
+}
+
+.agile-tracker-task-list-element-foot-content label::after {
+    content: ":";
+}
+
+.agile-tracker-task-list-element-foot-content span {
+    text-transform: uppercase;
+
+    font-weight: 600;
+}
+
+.agile-tracker-task-list-element-description-root {
+    margin: 12px 0px;
+
+    -webkit-animation-name: expand;
+    -webkit-animation-duration: 1s;
+    animation-name: expand;
+    animation-duration: 1s;
+}
+
+@-webkit-keyframes expand {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes expand {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.agile-tracker-task-list-element-description-root.hide {
+    display: none;
+
+    /* -webkit-transition: all 0.25s;
+    -moz-transition: all 0.25s;
+    transition: all 0.25s; */
+}
+
+.agile-tracker-task-list-element-description-root.show {
+    display: block;
+
+    /* -webkit-transition: all 0.25s;
+    -moz-transition: all 0.25s;
+    transition: all 0.25s; */
+}
+
+.agile-tracker-task-list-element-description {
+    background: #f2f2f2;
+
+    border-radius: 2px;
+    padding: 12px;
+}
+
+.agile-tracker-task-list-element-description label {
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.agile-tracker-task-list-element-description label::after {
+    content: ":";
+}
