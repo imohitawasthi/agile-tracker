@@ -7,6 +7,7 @@ export default createTypes(`
 
     POST_TASK
     DELETE_TASK
+    PUT_TASK
 
     GET_BUCKET
     RESPONSE_BUCKET

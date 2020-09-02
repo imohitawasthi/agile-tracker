@@ -14,8 +14,9 @@ const postTask = (payload) => ({
     payload
 })
 
-const deleteTask = (taskId) => ({
-    type: Types.DELETE_TASK,
+const putTask = (payload, taskId) => ({
+    type: Types.PUT_TASK,
+    payload,
     taskId
 })
 
@@ -44,7 +45,7 @@ export default {
     responseTask,
     
     postTask,
-    deleteTask,
+    putTask,
 
     getBucket,
     responseBucket,

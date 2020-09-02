@@ -14,6 +14,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getTask: () => dispatch(Actions.getTask()),
         postTask: (payload) => dispatch(Actions.postTask(payload)),
+        putTask: (payload, id) => dispatch(Actions.putTask(payload, id)),
 
         getBucket: () => dispatch(Actions.getBucket()),
         postBucket: (payload) => dispatch(Actions.postBucket(payload))

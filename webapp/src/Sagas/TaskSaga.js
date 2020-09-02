@@ -18,6 +18,11 @@ function* postTask(action) {
     yield put(Actions.getTask())
 }
 
+function* putTask(action) {
+    yield call(Assay.Task.putTask, Assay.Task, action.payload, action.taskId)
+    yield put(Actions.getTask())
+}
+
 function* getBucket(action) {
     const response = yield call(Assay.Task.getBucket, Assay.Task)
     if (response && !!!response.error) {
@@ -37,6 +42,7 @@ export function* watchTask() {
     yield* [
         takeEvery(Types.GET_TASK, getTask),
         takeEvery(Types.POST_TASK, postTask),
+        takeEvery(Types.PUT_TASK, putTask),
 
         takeEvery(Types.GET_BUCKET, getBucket),
         takeEvery(Types.POST_BUCKET, postBucket),

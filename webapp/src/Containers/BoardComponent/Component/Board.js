@@ -9,7 +9,7 @@ import "./Board.css"
 
 const MAP_OPTIONS = (clickMap) => [
     {
-        label: "View Buckets",
+        label: "Buckets",
         className: "agile-tracker-button agile-tracker-button-type-transparent",
         onClick: () => clickMap["bucket"](),
     },
@@ -23,7 +23,7 @@ const MAP_OPTIONS = (clickMap) => [
 const FORM_BUCKET = [
     {
         key: "bucket-name",
-        className: "col-12",
+        className: "col-12 padding-0",
         label: "Name",
         type: "text",
         placeholder: "Name of the Bucket.",
@@ -31,7 +31,7 @@ const FORM_BUCKET = [
     },
     {
         key: "bucket-description",
-        className: "col-12",
+        className: "col-12 padding-0",
         label: "Description",
         type: "text",
         placeholder: "A short description.",
@@ -97,14 +97,18 @@ const FORM_TASK = (options) => [
 ]
 
 const STRING_CREATE_BUCKET = "Create a new Bucket"
-const STRING_CREATE_TASK = "Create a new Bucket"
-const STRING_ADD_BUCKET = "Add Bucket"
+const STRING_CREATE_TASK = "Create a new Task"
+const STRING_EDIT_TASK = "Edit Task"
+const STRING_ADD_BUCKET = "Create a new Bucket"
 const STRING_ADD_TASK = "Create Task"
 const STRING_UPDATE_TASK = "Update Task"
 const STRING_DELETE_TASK = "Delete Task"
 
 const STRING_CLOSE = "Close"
 const STRING_SUBMIT = "Submit"
+
+const STRING_CANCEL = "Cancel"
+const STRING_CREATE = "Create"
 
 const STRING_DESCRIPTION = "Description"
 const STRING_DETAIL = "Detail"
@@ -138,17 +142,32 @@ class Board extends React.Component {
         this.props.getBucket()
     }
 
-    componentDidUpdate(oldProps) {
+    componentDidUpdate(oldProps, oldState) {
         if (this.props.bucket && this.props.bucket.length && oldProps.bucket !== this.props.bucket) {
             this.setState({ metaTaskBucket: this.props.bucket.map((element) => ({ value: element.bucket_id, label: element.bucket_name })) })
         }
+
+        if (this.state.selectedTask !== oldState.selectedTask){
+            this.parseSelectedTask(this.state.selectedTask || {})
+        }
     }
+
+    parseSelectedTask(task) {
+        this.setState({
+            'task-name': task.task_heading,
+            'task-description': task.task_description,
+            'task-bucket': task.bucket_id,
+            'task-type': task.task_type,
+            'task-status': task.task_active_status,
+            'task-details': task.task_details
+        })
+    } 
 
     createMetaTask(metaMap, stateValue) {
         this.setState({ [stateValue]: Object.keys(metaMap).map((element) => ({ value: metaMap[element], label: element })) })
     }
 
-    mapForm(element, index) {
+    mapForm(element, index, current={}) {
         return element.type === "text" ? (
             <form.TextInput
                 index={index}
@@ -177,7 +196,7 @@ class Board extends React.Component {
                 className={element.className}
                 key={element.key}
                 label={element.label}
-                value={this.state[element.key] || (element.options && element.options.length) ? element.options[0].value : null}
+                value={this.state[element.key] || ((element.options && element.options.length) ? element.options[0].value : null)}
                 onChange={(value) => {
                     this.setState({ [element.key]: value.target.value, ["error-" + element.key]: element.validation(value.target.value) })
                 }}
@@ -214,7 +233,7 @@ class Board extends React.Component {
         <div>
             <div className="agile-tracker-bucket-body-add-new right">
                 <button className={`agile-tracker-button agile-tracker-button-type-transparent`} onClick={() => this.setState({ showAddBucketOption: false })}>
-                    {STRING_CLOSE}
+                    {STRING_CANCEL}
                 </button>
                 <button
                     className={`agile-tracker-button agile-tracker-button-type-success`}
@@ -236,11 +255,11 @@ class Board extends React.Component {
                         }
                     }}
                 >
-                    {STRING_SUBMIT}
+                    {STRING_CREATE}
                 </button>
             </div>
             <div style={{ margin: "0px 8px" }}>
-                <div className="agile-tracker-form">{FORM_BUCKET.map((element, index) => this.mapForm(element, index))}</div>
+                <div className="agile-tracker-form">{FORM_BUCKET.map((element, index) => this.mapForm(element, index, {}))}</div>
             </div>
         </div>
     )
@@ -304,6 +323,32 @@ class Board extends React.Component {
         })
     }
 
+    handleTaskUpdate(taskId, element={}) {
+        this.props.putTask({
+            task_id: taskId,
+            task_priority: 1,
+            task_active_status: Number.parseInt(
+                this.state["task-status"] || (this.state.metaTaskStatus && this.state.metaTaskStatus.length) ? this.state.metaTaskStatus[0].value : 1
+            ),
+            task_type: Number.parseInt(
+                this.state["task-type"] || (this.state.metaTaskType && this.state.metaTaskType.length) ? this.state.metaTaskType[0].value : 1
+            ),
+            bucket_id: Number.parseInt(
+                this.state["task-bucket"] || (this.state.metaTaskBucket && this.state.metaTaskBucket.length) ? this.state.metaTaskBucket[0].value : 1
+            ),
+            create_time: moment().format(),
+            modified_time: moment().format(),
+            user_id: Constants.DEFAULT_USER_ID,
+            task_heading: this.state["task-name"],
+            task_description: this.state["task-description"],
+            task_details: this.state["task-details"],
+            task_start_date: moment().format(),
+            task_end_date: moment().format(),
+
+            ...element
+        }, taskId)
+    }
+
     renderTaskModalBody = () => {
         const { metaTaskType, metaTaskStatus, metaTaskBucket, selectedTask } = this.state
 
@@ -315,15 +360,24 @@ class Board extends React.Component {
 
         return (
             <div className="agile-tracker-task-body">
-                <div className="agile-tracker-form">{FORM_TASK(mapOptions).map((element, index) => this.mapForm(element, index))}</div>
+                <div className="agile-tracker-form">{FORM_TASK(mapOptions).map((element, index) => this.mapForm(element, index, selectedTask || {}))}</div>
 
                 <div className="agile-tracker-task-buttons center">
                     {selectedTask ? (
                         <div>
-                            <button className="agile-tracker-button agile-tracker-button-type-transparent" onClick={() => this.handleTaskSubmit()}>
+                            <button
+                                className="agile-tracker-button agile-tracker-button-type-transparent"
+                                onClick={() => {
+                                    // this.props.deleteTask(selectedTask.task_id)
+                                    this.setState({ isModalActiveNewTask: false, selectedTask: null })
+                                }}
+                            >
                                 {STRING_DELETE_TASK}
                             </button>
-                            <button className="agile-tracker-button agile-tracker-button-type-success" onClick={() => this.handleTaskSubmit()}>
+                            <button className="agile-tracker-button agile-tracker-button-type-success" onClick={() => {
+                                    this.handleTaskUpdate(selectedTask.task_id, {})
+                                    this.setState({ isModalActiveNewTask: false, selectedTask: null })
+                                }}>
                                 {STRING_UPDATE_TASK}
                             </button>
                         </div>
@@ -347,7 +401,7 @@ class Board extends React.Component {
         }
 
         return [
-            { label: <label>Created On</label>, key: "create_time", value: (e) => <span>{moment(e).format("l")}</span> },
+            { label: <label>Created On</label>, key: "create_time", value: (e) => <span style={{textTransform: "none"}}>{moment(e).format("llll")}</span> },
             {
                 label: <label>Status</label>,
                 key: "task_active_status",
@@ -376,12 +430,12 @@ class Board extends React.Component {
                               {this.state.showTaskOptions[index] ? (
                                   <div className="agile-tracker-task-list-element-head-options">
                                       <i
-                                          class="fa fa-pencil-square-o"
+                                          className="fa fa-pencil-square-o"
                                           onClick={() => this.setState({ isModalActiveNewTask: true, selectedTask: element })}
                                           aria-hidden="true"
                                       ></i>
                                       <i
-                                          class="fa fa-expand"
+                                          className="fa fa-expand"
                                           onClick={() =>
                                               this.setState({
                                                   expandTaskDetails: { ...this.state.expandTaskDetails, [index]: !this.state.expandTaskDetails[index] },
@@ -440,9 +494,9 @@ class Board extends React.Component {
 
                 <Dialog
                     active={this.state.isModalActiveNewTask}
-                    onClose={() => this.setState({ isModalActiveNewTask: false })}
-                    onHide={() => this.setState({ isModalActiveNewTask: false })}
-                    header={STRING_CREATE_TASK}
+                    onClose={() => this.setState({ isModalActiveNewTask: false, selectedTask: null })}
+                    onHide={() => this.setState({ isModalActiveNewTask: false, selectedTask: null })}
+                    header={this.state.selectedTask ? STRING_EDIT_TASK : STRING_CREATE_TASK}
                     headerClass={"center"}
                     body={this.renderTaskModalBody()}
                 />

@@ -26,6 +26,15 @@ export default class AssayTask {
             }
         }
 
+        this.putTask = function* (that, payload, taskId) {
+            let response = yield Api.putTask(payload, taskId)
+            if (response.ok && response.data) {
+                return true
+            } else {
+                return false
+            }
+        }
+
         this.postTaskDetails = function* (that) {
             let response = yield Api.postTaskDetails()
             if (response.ok && response.data && response.data.results && response.data.results.length > 0) {
